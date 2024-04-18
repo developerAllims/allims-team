@@ -6,6 +6,7 @@
   "author": "ricardomiranda-allims <54359457+ricardomiranda-allims@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
+    "prestart": "yarn",
     "start": "node index.js"
   },
   "dependencies": {
