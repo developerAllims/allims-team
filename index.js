@@ -91,10 +91,19 @@ const doGitPush = () => {
   return out
 }
 
+const refreshIps = async () => {
+  const endpoint = '/api/team'
+  const domains = ['allims.net', 'fitossanitario.net']
+  for (const domain of domains) {
+    await axios.get(`https://${domain}${endpoint}`)
+  }
+}
+
 ;(async () => {
   const newFile = await getNewIpFile()
   fs.writeFileSync(ipFilename, newFile)
   doGitAdd()
   doGitCommit()
   doGitPush()
+  await refreshIps()
 })()
