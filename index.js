@@ -10,6 +10,12 @@ const getGitUser = () => {
   return out
 }
 
+const getGitPull = () => {
+  const cmd = 'git pull'
+  const out = execSync(cmd).toString().trim()
+  return out
+}
+
 const dtoGitUserToAcronym = (username = '') => {
   const users = {
     joaodejulio: 'JJ',
@@ -100,6 +106,7 @@ const refreshIps = async () => {
 }
 
 ;(async () => {
+  getGitPull()
   const oldFile = getIpFile()
   const newFile = await getNewIpFile()
   if (oldFile !== newFile) {
