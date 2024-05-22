@@ -115,10 +115,10 @@ const refreshIps = async () => {
   const oldFile = getIpFile()
   const newFile = await getNewIpFile()
   if (oldFile !== newFile) {
-    // fs.writeFileSync(ipFilename, newFile)
-    // doGitAdd()
-    // doGitCommit()
-    // doGitPush()
+    fs.writeFileSync(ipFilename, newFile)
+    doGitAdd()
+    doGitCommit()
+    doGitPush()
   }
   await refreshIps()
 })()
