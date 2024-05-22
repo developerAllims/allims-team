@@ -63,7 +63,6 @@ const getIpFileLineByUser = (lines, user) => {
     const parts = line.split(' #') || []
     return parts[1] === user
   })
-  console.log(lineNumber, user)
   return lineNumber
 }
 
