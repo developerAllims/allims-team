@@ -5,9 +5,13 @@ const { execSync } = require('child_process')
 const ipFilename = 'ips.txt'
 
 const getGitUser = () => {
-  const cmd = 'git config user.name'
-  const out = execSync(cmd).toString().trim()
-  return out
+  const cmd = 'git config user.email'
+  const out = execSync(cmd).toString().trim() || ''
+  let parts = out.split('+') || []
+  let temp = parts.pop() || ''
+  parts = temp.split('@') || []
+  temp = parts.shift() || ''
+  return temp
 }
 
 const getGitPull = () => {
@@ -59,6 +63,7 @@ const getIpFileLineByUser = (lines, user) => {
     const parts = line.split(' #') || []
     return parts[1] === user
   })
+  console.log(lineNumber, user)
   return lineNumber
 }
 
@@ -110,10 +115,10 @@ const refreshIps = async () => {
   const oldFile = getIpFile()
   const newFile = await getNewIpFile()
   if (oldFile !== newFile) {
-    fs.writeFileSync(ipFilename, newFile)
-    doGitAdd()
-    doGitCommit()
-    doGitPush()
+    // fs.writeFileSync(ipFilename, newFile)
+    // doGitAdd()
+    // doGitCommit()
+    // doGitPush()
   }
   await refreshIps()
 })()
