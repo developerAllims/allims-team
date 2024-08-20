@@ -105,7 +105,11 @@ const refreshIps = async () => {
   const endpoint = '/api/team'
   const domains = ['allims.net', 'fitossanitario.net']
   for (const domain of domains) {
-    await axios.get(`https://${domain}${endpoint}`)
+    try {
+      await axios.get(`https://${domain}${endpoint}`)
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 }
 
